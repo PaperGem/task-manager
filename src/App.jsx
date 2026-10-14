@@ -68,7 +68,7 @@ export default function App() {
   }
 
   function countCompletedTasks(tasks) {
-     return(tasks.filter(task => task.completed === true));
+     return(tasks.filter(task => task.completed === true).length);
   }
 
   function addTask(tasks, newTask) {
@@ -80,11 +80,30 @@ export default function App() {
   }
 
   function toggleTaskCompleted(tasks, id) {
-    // TODO
+    const toggle = tasks.map((task) => {
+     if(task.id === id){
+    return{...task,completed: !task.completed}
+     }
+     else{
+     return task;
+     }
+    });
+    return toggle;
   }
 
   function updateTaskPriority(tasks, id, newPriority) {
-    // TODO
+  const targetTask = tasks.find(task => task.id ===id);
+
+  if(targetTask=== undefined){
+    return tasks;
+  }
+  return tasks.map (task=> {
+    if(task.id === id){
+      return {...task, priority : newPriority}
+    }
+    return task;
+  })
+    
   }
 
   // ================================================================
